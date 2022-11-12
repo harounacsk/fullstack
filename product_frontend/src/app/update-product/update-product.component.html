@@ -1,0 +1,12 @@
+<br />
+<div>
+    <form [formGroup]="productFormGroup" (ngSubmit)="updateProduct()">
+        <label for="name">Name:</label>
+        <input type="hidden" formControlName="id">
+        <input type="text" formControlName="name" /><br><br />
+        <label for="price">Price:</label>
+        <input type="number" formControlName="price" /><br /><br />
+        <button type="submit" [disabled]="productFormGroup.invalid">Update</button>
+    </form>
+
+</div>
