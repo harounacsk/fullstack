@@ -14,10 +14,16 @@ export class ProductService {
   public findAll(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.producturl}all`);
   }
-
-  public findById(id: number): Observable<Product> {
+/**
+ * 
+ * @param id 
+ * @returns 
+ * 
+ * public findById(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.producturl}detail?id=` + id);
   }
+ */
+  
 
   public save(product: Product): Observable<string> {
     return this.http.post<string>(`${this.producturl}add`, product);

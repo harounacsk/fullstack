@@ -10,35 +10,39 @@ import { ProductService } from '../services/product/product.service';
   styleUrls: ['./update-product.component.css']
 })
 export class UpdateProductComponent implements OnInit {
-  product! : Product;
-  productFormGroup! : FormGroup;
-  constructor(private productService :ProductService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private router : Router) { }
+  products!: Product[];
+  product!: Product;
+  productFormGroup!: FormGroup;
+  constructor(private productService: ProductService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.findById(Number(id));
+
+    this.findProductById(Number(id));
+
   }
-  public findById(id:number):void {
-    this.productService.findById(id).subscribe({
-      next:(data=>{
-        this.productFormGroup=this.fb.group({
-          id: new FormControl(data.id,[Validators.required]),
-          name: new FormControl(data.name,[Validators.required,Validators.minLength(4)]),
-          price: new FormControl(data.price,[Validators.required,Validators.min(0.1)])
+  public findProductById(id: number): void {
+    this.productService.findAll().subscribe({
+      next: (data => {
+        this.products = data;
+        this.product = this.products.find(p => p.id == id)!;
+        this.productFormGroup = this.fb.group({
+          id: new FormControl(this.product.id, [Validators.required]),
+          name: new FormControl(this.product.name, [Validators.required, Validators.minLength(4)]),
+          price: new FormControl(this.product.price, [Validators.required, Validators.min(0.1)])
         })
-      }),
-      error: (err=>console.log(err))
-    })
+      })
+    });
   }
 
-  public updateProduct(){
-    let product :Product={
+  public updateProduct() {
+    let product: Product = {
       id: this.productFormGroup.value.id,
       name: this.productFormGroup.value.name,
       price: this.productFormGroup.value.price
     };
     this.productService.update(product).subscribe({
-      next: (data=>console.log(data))
+      next: (data => console.log(data))
     });
     this.router.navigateByUrl("/");
   }

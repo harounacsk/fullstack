@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Product } from '../model/product';
 import { ProductService } from '../services/product/product.service';
 
@@ -12,18 +11,30 @@ import { ProductService } from '../services/product/product.service';
 })
 export class ProductsComponent implements OnInit {
 
-  products : Product[] | undefined;
-
+  products! : Product[];
+  dtoptions: DataTables.Settings={};
+  dttrigger: Subject<any> = new Subject<any>();
+  
   constructor(private productService : ProductService, private router: Router) { }
 
   ngOnInit(): void {
-    this.productService.findAll().subscribe({
-      next :(data=>{this.products=data;}),
-      error: (err=>console.log(err))
-    });
+    this.dtoptions={
+      pagingType: 'full_numbers',
+      pageLength:10
+  
+    };
+    this.loadProduct();
   }
  
+public loadProduct():void{
+  this.productService.findAll().subscribe({
+    next :(data=>{
+      this.products=data;      
+    }),
+    error: (err=>console.log(err))
+  });
 
+}
   public delete(id:number){
     this.productService.delete(id).subscribe({
       next:(data)=>{
