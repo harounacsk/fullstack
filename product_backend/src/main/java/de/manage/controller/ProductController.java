@@ -48,9 +48,8 @@ public class ProductController {
     return productRepository.findAll();
   }
 
-  //@PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
   @PostMapping(value = "/add")
-  public @ResponseBody String save(@RequestBody Product product) {
+  public String save(@RequestBody Product product) {
     Product p = productRepository.save(product);
     return message.getSuccess();
   }
