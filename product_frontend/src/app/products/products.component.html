@@ -1,9 +1,11 @@
 <div>
     <hr>
 
-    <table datatable [dtOptions]="dtoptions" >
+    <table datatable [dtOptions]="dtOptions" class="row-border hover">
         <thead>
-            <th>ID</th><th>Name</th><th>Price</th><th>Action</th>
+            <tr>
+                <th>ID</th><th>Name</th><th>Price</th><th>Action</th>
+            </tr>
         </thead>
         <tbody>
             <tr *ngFor="let product of products">
