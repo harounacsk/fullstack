@@ -11,27 +11,11 @@ import { ProductService } from '../services/product/product.service';
 export class ProductsComponent implements OnInit {
 
   products!: Product[];
-  dtOptions: DataTables.Settings = {};
+  displayTable: boolean = false;
 
-  constructor(private productService: ProductService, private router: Router) { }
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
-    
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      language: {
-        search: "Suchen:",
-        lengthMenu: "Anzeige _MENU_ Produkte",
-        info: "Anzeige  _START_ bis _END_ von _TOTAL_ Produkten",
-        infoPostFix: "",
-        paginate: {
-          first: "Erste",
-          previous: "Zurück",
-          next: "Weiter",
-          last: "Letzte"
-        }
-      }
-    };
     this.loadProduct();
   }
 
@@ -39,10 +23,9 @@ export class ProductsComponent implements OnInit {
     this.productService.findAll().subscribe({
       next: (data => {
         this.products = data;
-      }),
-      error: (err => console.log(err))
+        this.displayTable = true;
+      })
     });
-
   }
   public delete(id: number) {
     this.productService.delete(id).subscribe({
