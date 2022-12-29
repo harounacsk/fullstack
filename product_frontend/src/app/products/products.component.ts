@@ -18,7 +18,19 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     
     this.dtOptions = {
-      pagingType: 'full_numbers'
+      pagingType: 'full_numbers',
+      language: {
+        search: "Suchen:",
+        lengthMenu: "Anzeige _MENU_ Produkte",
+        info: "Anzeige  _START_ bis _END_ von _TOTAL_ Produkten",
+        infoPostFix: "",
+        paginate: {
+          first: "Erste",
+          previous: "Zurück",
+          next: "Weiter",
+          last: "Letzte"
+        }
+      }
     };
     this.loadProduct();
   }

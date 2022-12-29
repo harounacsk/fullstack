@@ -34,11 +34,11 @@ public class ProductController {
         List<Product> products = productRepository.findAll();
         if (products.size() == 0) {
             for (int i = 1; i < 20; i++) {
-                productRepository.save(new Product(1L, "Computer" + i, 540));
-                productRepository.save(new Product(2L, "Laptop" + i, 799.99f));
-                productRepository.save(new Product(3L, "Printer" + i, 108.90f));
-                productRepository.save(new Product(4L, "Table" + i, 123.87f));
-                productRepository.save(new Product(5L, "Pen" + i, 23.54f));
+                productRepository.save(new Product( "Computer" + i, 540));
+                productRepository.save(new Product( "Laptop" + i, 799.99f));
+                productRepository.save(new Product( "Printer" + i, 108.90f));
+                productRepository.save(new Product( "Table" + i, 123.87f));
+                productRepository.save(new Product( "Pen" + i, 23.54f));
             }
 
         }

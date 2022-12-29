@@ -28,7 +28,7 @@ export class UpdateProductComponent implements OnInit {
         this.product = this.products.find(p => p.id == id)!;
         this.productFormGroup = this.fb.group({
           id: new FormControl(this.product.id, [Validators.required]),
-          name: new FormControl(this.product.name, [Validators.required, Validators.minLength(4)]),
+          name: new FormControl(this.product.name, [Validators.required, Validators.minLength(3)]),
           price: new FormControl(this.product.price, [Validators.required, Validators.min(0.1)])
         })
       })
