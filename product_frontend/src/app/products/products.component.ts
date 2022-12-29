@@ -12,11 +12,27 @@ export class ProductsComponent implements OnInit {
 
   products!: Product[];
   displayTable: boolean = false;
+  dtOptions : DataTables.Settings={};
 
   constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadProduct();
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      language: {
+        search: "Suchen:",
+        lengthMenu: "Anzeige _MENU_ Produkte",
+        info: "Anzeige  _START_ bis _END_ von _TOTAL_ Produkten",
+        infoPostFix: "",
+        paginate: {
+          first: "Erste",
+          previous: "Zurück",
+          next: "Weiter",
+          last: "Letzte"
+        }
+      }
+    };
   }
 
   public loadProduct(): void {

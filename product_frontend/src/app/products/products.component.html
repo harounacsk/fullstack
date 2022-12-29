@@ -1,5 +1,6 @@
 <div *ngIf="displayTable">
-    <table datatable class="row-border hover">
+    <hr>
+    <table datatable [dtOptions]="dtOptions" class="row-border hover">
         <thead>
             <tr>
                 <th>ID</th>
