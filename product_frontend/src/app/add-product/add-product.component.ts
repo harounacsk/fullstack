@@ -11,31 +11,31 @@ import { ProductService } from '../services/product/product.service';
 })
 export class AddProductComponent implements OnInit {
   productFormGroup !: FormGroup;
-  constructor(private productService : ProductService, private fb : FormBuilder, private router : Router) { }
+  constructor(private productService: ProductService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
-    this.productFormGroup=this.fb.group({
-      name: new FormControl('',[Validators.required,Validators.minLength(4)]),
-      price: new FormControl(0, [Validators.required,Validators.min(0.1)])
+    this.productFormGroup = this.fb.group({
+      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      price: new FormControl(0, [Validators.required, Validators.min(0.1)])
     })
   }
- 
-  public saveProduct():void{
-    let message : string; 
-    let product :Product={
+
+  public saveProduct(): void {
+    let message: string;
+    let product: Product = {
       id: 0,
       name: this.productFormGroup.value.name,
       price: this.productFormGroup.value.price
     };
-   
+
     this.productService.save(product).subscribe({
-      next:data=>{
-        message= data;
-        //console.log(message);
+      next: data => {
+        message = data;
+        console.log(message);
       }
     });
     this.router.navigateByUrl("/");
   }
 
- 
+
 }

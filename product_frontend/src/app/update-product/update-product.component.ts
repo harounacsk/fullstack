@@ -17,10 +17,9 @@ export class UpdateProductComponent implements OnInit {
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
-
     this.findProductById(Number(id));
-
   }
+
   public findProductById(id: number): void {
     this.productService.findAll().subscribe({
       next: (data => {

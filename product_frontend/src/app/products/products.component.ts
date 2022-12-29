@@ -11,16 +11,12 @@ import { ProductService } from '../services/product/product.service';
 export class ProductsComponent implements OnInit {
 
   products!: Product[];
+  dtOptions: DataTables.Settings = {};
   displayTable: boolean = false;
-  dtOptions : DataTables.Settings={};
 
-  constructor(private productService: ProductService, private router: Router) {}
+  constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
-    this.loadProduct();
-    /**
-     * dtOptions: Language 
-     */
     this.dtOptions = {
       pagingType: 'full_numbers',
       language: {
@@ -36,6 +32,7 @@ export class ProductsComponent implements OnInit {
         }
       }
     };
+    this.loadProduct();
   }
 
   public loadProduct(): void {
@@ -46,6 +43,7 @@ export class ProductsComponent implements OnInit {
       })
     });
   }
+
   public delete(id: number) {
     this.productService.delete(id).subscribe({
       next: (data) => {
