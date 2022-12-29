@@ -18,6 +18,9 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProduct();
+    /**
+     * dtOptions: Language 
+     */
     this.dtOptions = {
       pagingType: 'full_numbers',
       language: {
